@@ -1,0 +1,28 @@
+.questListBox {
+  border: dotted pink 2px;
+  width: 35rem;
+  height: auto;
+  margin: 1rem;
+  padding: 1rem;
+
+  .questSect {
+    display: flex;
+    gap: 1rem;
+    .addQuestDiv {
+      border: rgba(135, 135, 135, 0.149) solid 1px;
+      display: flex;
+      flex-direction: column;
+      
+    }
+    .allQuestSect {
+      border: black solid 1px;
+
+      .deleteBtn{
+        font-size: 8px;
+        background-color: rgba(240, 72, 72, 0.711);
+        color: white;
+        border: none;       
+      }
+    }
+  }
+}
