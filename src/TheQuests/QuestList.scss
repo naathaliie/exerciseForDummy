@@ -12,16 +12,28 @@
       border: rgba(135, 135, 135, 0.149) solid 1px;
       display: flex;
       flex-direction: column;
-      
     }
     .allQuestSect {
       border: black solid 1px;
+      .button-box {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.3rem;
+        .btn {
+          font-size: 8px;
+          color: white;
+          border: none;
+        }
+        .edit {
+          background-color: rgb(134, 223, 134);
+        }
+        .delete {
+          background-color: rgba(238, 106, 106, 0.711);
+        }
+        .save{
+            background-color: rgb(123, 123, 236);
 
-      .deleteBtn{
-        font-size: 8px;
-        background-color: rgba(240, 72, 72, 0.711);
-        color: white;
-        border: none;       
+        }
       }
     }
   }

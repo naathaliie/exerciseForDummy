@@ -7,7 +7,11 @@ Man ska kunna toggla ett quest att vara avklarat eller inte.
 Det kan vara checkboxar man klickar i och ur, eller någon annan design. 
 
 Version 2
-Man ska kunna lägga till nya quests i listan. Lägg till ett inputfält och en knapp.*/
+Man ska kunna lägga till nya quests i listan. Lägg till ett inputfält och en knapp.
+
+Version 3
+Man ska kunna redigera och ta bort befintliga quests. 
+Förslagsvis en Edit-knapp och Delete-knapp.*/
 
 import "./QuestList.scss";
 import { useRef, useState } from "react";
@@ -20,6 +24,12 @@ const QuestList = () => {
   const [quests, setQuest] = useState(initialQuests);
   const qNameRef = useRef<HTMLInputElement>(null);
   const qDescRef = useRef<HTMLInputElement>(null);
+  //För att kkunna toggla mellan edit-mode och vanligt-mode
+  const [editMode, setEditMode] = useState<null | string>(null);
+  //För att sätta det valda questets namn som input
+  const [editName, setEditName] = useState("");
+  //För att sätta det valda questets beskrivning som input
+  const [editDescription, setEditDescription] = useState("");
 
   console.log("Quests: ", quests);
 
@@ -52,6 +62,38 @@ const QuestList = () => {
     setQuest(sortedQuests);
   };
 
+  //Vad som händer när man klickar på edit-knappen.
+  const toggleEditMode = (id: string) => {
+    //Om editMode är samma som id skall editMode bli som default, null
+    if (editMode === id) {
+      setEditMode(null);
+    } // Annars skall editMode bli samma som id
+    else {
+      setEditMode(id);
+      //Hitta det klickade questet
+      const questToEdit = quests.find((q) => {
+        return q.id === id;
+      });
+      //Om vi hittar det klickade questet så
+      if (questToEdit) {
+        setEditName(questToEdit.name);
+        setEditDescription(questToEdit.description);
+      }
+    }
+  };
+
+  //Vad som händer när man klickar på spara i edit-läget
+  const saveEditHandler = () => {
+    //Skapar det nya questet
+    const updatedQuest = quests.map((q) =>
+      q.id === editMode
+        ? { ...q, name: editName, description: editDescription }
+        : q
+    );
+    setQuest(updatedQuest);
+    setEditMode(null);
+  };
+
   return (
     <div className="questListBox">
       <h1>The quests</h1>
@@ -71,8 +113,32 @@ const QuestList = () => {
           {quests.map((q) => {
             return (
               <ul key={q.id}>
-                <li>Quest: {q.name}</li>
-                <li>Description: {q.description}</li>
+                <li>
+                  {editMode === q.id ? (
+                    <input
+                      type="text"
+                      value={editName}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setEditName(e.target.value);
+                      }}
+                    />
+                  ) : (
+                    `Quest: ${q.name}`
+                  )}
+                </li>
+                <li>
+                  {editMode === q.id ? (
+                    <input
+                      type="text"
+                      value={editDescription}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setEditDescription(e.target.value);
+                      }}
+                    />
+                  ) : (
+                    `Description: ${q.description}`
+                  )}
+                </li>
                 {/* Span används för att ge mer kontroll över utseendet (behåller det precis som emojin ser ut) te.x en button hade ändrat på utseendet*/}
                 <li>
                   Complete:{" "}
@@ -113,14 +179,30 @@ const QuestList = () => {
                     </span>
                   )}
                 </li>
-                <button
-                  className="deleteBtn"
-                  onClick={() => {
-                    deleteQuestHandler(q.id);
-                  }}
-                >
-                  Delete
-                </button>
+                <div className="button-box">
+                  {editMode === q.id ? (
+                    <button className="btn save" onClick={saveEditHandler}>
+                      Spara
+                    </button>
+                  ) : (
+                    <button
+                      className="btn edit"
+                      onClick={() => {
+                        toggleEditMode(q.id);
+                      }}
+                    >
+                      Redigera
+                    </button>
+                  )}
+                  <button
+                    className="btn delete"
+                    onClick={() => {
+                      deleteQuestHandler(q.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </ul>
             );
           })}
