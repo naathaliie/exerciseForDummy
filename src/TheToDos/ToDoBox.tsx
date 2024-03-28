@@ -9,7 +9,12 @@ import "./ToDo.scss";
 const ToDoBox = () => {
   const allToDoS = initialToDoS;
 
-  return <div className="todo-box">ToDo</div>;
+  return (
+    <div className="toDo-box">
+      <p>Att göra:</p>
+      <ToDoBox />
+    </div>
+  );
 };
 
 export default ToDoBox;
