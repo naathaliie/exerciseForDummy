@@ -4,12 +4,12 @@ Användaren ska kunna lägga till Quests i en Quest Book. Tänk punktlista med t
 Använd React med Typescript och Sass. Sätt upp med Vite. */
 import "./App.scss";
 import QuestList from "./TheQuests/QuestList";
-import ToDo from "./TheToDos/ToDo";
+import ToDoBox from "./TheToDos/ToDoBox";
 
 function App() {
   return (
     <>
-      <ToDo />
+      <ToDoBox />
       {/* <QuestList /> */}
     </>
   );
