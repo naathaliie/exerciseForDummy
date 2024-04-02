@@ -1,33 +1,33 @@
 import uuid from "react-uuid";
 import { getDate } from "../functions/getDate";
 
-type toDo = {
+export type ToDo = {
   id: string;
   name: string;
-  date: object;
+  date: string;
   description: string;
   finished: boolean;
 };
 
-export const initialToDoS: toDo[] = [
+export const initialToDoS: ToDo[] = [
   {
     id: uuid(),
-    name: "Påskafton",
-    date: getDate,
-    description: "Skapa inköpslista, planera lekar",
+    name: "Handla",
+    date: getDate(),
+    description: "Bröd, smör, Ost, Skinka",
     finished: false,
   },
   {
     id: uuid(),
-    name: "Lekar",
-    date: getDate,
-    description: "Ägg på sked, penna i flaskan, yatzy",
+    name: "Städa",
+    date: getDate(),
+    description: "Dammsuga, damma",
     finished: false,
   },
   {
     id: uuid(),
     name: "Mat",
-    date: getDate,
+    date: getDate(),
     description: "Ägg, kött till grill, sallad, dricka, godis, potatisgratäng?",
     finished: false,
   }
