@@ -1,6 +1,10 @@
 import uuid from "react-uuid";
 import { getDate } from "../functions/getDate";
 
+
+
+
+
 export type ToDo = {
   id: string;
   name: string;
@@ -9,13 +13,14 @@ export type ToDo = {
   finished: boolean;
 };
 
+
 export const initialToDoS: ToDo[] = [
   {
     id: uuid(),
     name: "Handla",
     date: getDate(),
     description: "Bröd, smör, Ost, Skinka",
-    finished: false,
+    finished: true,
   },
   {
     id: uuid(),
