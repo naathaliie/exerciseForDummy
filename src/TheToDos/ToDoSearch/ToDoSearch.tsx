@@ -4,11 +4,23 @@ import { ToDoContext } from "../../context/ToDoContext";
 import { ToDo } from "../../types/todoTypes";
 
 const ToDoSearch = () => {
-  const [searchInput, setSearchInput] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const { state } = useContext(ToDoContext);
   const [foundToDos, setFoundToDos] = useState<ToDo[]>([]);
 
   console.log("hittade todo´s", foundToDos);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = e.target.value.toLowerCase();
+    setSearchTerm(searchTerm);
+    const filteredToDoS = state.filter((todo) => {
+      return todo.name.toLowerCase().includes(searchTerm);
+    });
+
+    setFoundToDos(filteredToDoS);
+  };
+
+  /*********************************************/
   return (
     <div className="toDo-search">
       <label htmlFor="searc-input">
@@ -17,25 +29,23 @@ const ToDoSearch = () => {
           className="searc-input"
           type="text"
           placeholder="Sök..."
-          value={searchInput}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setSearchInput(e.target.value);
-          }}
+          value={searchTerm}
+          onChange={handleChange}
         />
       </label>
-      <button
-        onClick={() => {
+      {/*  <button
+       onClick={() => {
           const allFoundToDoS = state.filter((t) => {
             return t.name
               .toLocaleLowerCase()
-              .includes(searchInput.toLocaleLowerCase());
+              .includes(searchTerm.toLocaleLowerCase());
           });
           setFoundToDos(allFoundToDoS);
-          setSearchInput("");
-        }}
+          setSearchTerm("");
+        }} 
       >
         Sök
-      </button>
+      </button> */}
 
       <div className="todo-foundSearches">
         <p>Hittade todo´s:</p>
@@ -52,3 +62,7 @@ const ToDoSearch = () => {
 };
 
 export default ToDoSearch;
+
+/* (e: React.ChangeEvent<HTMLInputElement>) => {
+            setSearchInput(e.target.value);
+          } */

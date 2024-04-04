@@ -1,12 +1,16 @@
-#app{
+#app {
+  display: flex;
+  flex-wrap: wrap;
 
-display: flex;
+  border: dotted pink 2px;
+  height: auto;
+  width: auto;
+  margin: 1rem;
+  padding: 1rem;
 
-      border: dotted pink 2px;
-      max-height: 100vh;
-      min-height: auto;
-      max-width: 100vw;
-      min-width: auto;
-      margin: 1rem;
-      padding: 1rem;
-    }
+  #app-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px; /* Justera efter behov */
+  }
+}

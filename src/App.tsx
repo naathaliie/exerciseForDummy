@@ -11,11 +11,13 @@ import ToDoContextProvider from "./context/ToDoContextProvider";
 function App() {
   return (
     <div id="app">
-      <ToDoContextProvider>
-        <ToDoBox />
-        <ToDoSearch />
-      </ToDoContextProvider>
-      {/* <QuestList /> */}
+      <div id="app-container">
+        <ToDoContextProvider>
+          <ToDoBox />
+          <ToDoSearch />
+        </ToDoContextProvider>
+        <QuestList />
+      </div>
     </div>
   );
 }
